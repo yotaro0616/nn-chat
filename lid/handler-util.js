@@ -3,6 +3,17 @@ const fs = require('node:fs');
 const Cookies = require('cookies');
 const { currentThemeKey } = require('../config');
 
+function handleTopPage(req, res) {
+  res.writeHead(404, {
+    'Content-Type': 'text/html; charset=utf-8' 
+  });
+  res.write('<h1>NNチャットへようこそ!!!</h2>');
+  res.write('<p>下のリンクをクリックしてね</p>');
+  res.write('<p><a href="/posts">NNチャット</a></p>');
+  res.write('<p><a href="/logout">ログアウト</a></p>');
+  res.end();
+}
+
 function handleLogout(req, res) {
   res.writeHead(401, {
     'Content-Type': 'text/html; charset=utf-8'
@@ -66,6 +77,7 @@ function handleBadRequest(req, res) {
 }
 
 module.exports = {
+  handleTopPage,
   handleLogout,
   handleChangeTheme,
   handleFavicon,
